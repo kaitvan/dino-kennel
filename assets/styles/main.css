@@ -1,3 +1,29 @@
 body {
-    background-color: blue;
+    background-color: #EAEBEB;
+}
+
+#feed-button {
+    background-color: #6B815F;
+    color: white;
+}
+
+#pet-button {
+    background-color:#141B41;
+    color: white;
+}
+
+#adventure-button {
+    background-color: #F5BE51;
+    color: white;
+}
+
+#remove-button {
+    background-color: #AD343E;
+    color: white;
+}
+
+.dino-img {
+    width: 286px;
+    height: 250px;
+    background-image: cover;
 }
