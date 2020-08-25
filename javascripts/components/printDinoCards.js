@@ -37,7 +37,7 @@ const dinos = [
         owner: 'Abbey',
         adventures: [],
         health: 100,
-        imageUrl: 'https://lh3.googleusercontent.com/proxy/_rJSL88ErOEvgHl5SInWOEolOdikwIMcKWPv9iqZzt3IUkD33WdG6d9qd8TmNJFSiszTXm7JeGQPocmB_BZErKxt__25LOpW75dmnVuy0nuY0PatX2cIYA-C'
+        imageUrl: 'https://www.extinctanimals.org/wp-content/uploads/2015/09/Brontosaurus.jpg'
       },
       {
         id: 'dino5',
@@ -87,7 +87,7 @@ const dinos = [
         owner: 'Dr. T',
         adventures: [],
         health: 22,
-        imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTOdrC7hlvBawFQ7g8vgwHcfQphX5WfeN2bth0dvc4M2oxNGdSD'
+        imageUrl: 'https://vignette.wikia.nocookie.net/jurassicpark/images/7/74/Apatosaurus.png/revision/latest?cb=20150103191434'
       }
 ];
 
@@ -145,5 +145,24 @@ const adventures = [
 ];
 
 const printDinoCards = () => {
-
+    dinos.forEach((dino) => {
+        $('#dino-kennel').append(
+            `<div class="card m-2" style="width: 18rem;">
+                <div class="d-flex align-items-center dino-img">
+                    <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
+                    <div class="d-flex justify-content-around">
+                        <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
+                        <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
+                        <button class="btn" id="adventure-button"><i class="fa fa-suitcase"></i></button>
+                        <button class="btn" id="remove-button"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                </div>
+            </div>`
+        )
+    })
 };
+
+export { printDinoCards }
