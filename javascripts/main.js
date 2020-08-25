@@ -1,1 +1,5 @@
-console.log('yo javascript')
+const init = () => {
+
+};
+
+init();
