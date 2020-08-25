@@ -153,6 +153,9 @@ const printDinoCards = () => {
                 </div>
                 <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
+                    <div class="progress mb-3">
+                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
+                    </div>
                     <div class="d-flex justify-content-around">
                         <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
                         <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
