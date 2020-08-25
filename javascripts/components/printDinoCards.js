@@ -153,8 +153,10 @@ const printDinoCards = () => {
                 </div>
                 <div class="card-body">
                     <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
-                    <div class="progress mb-3">
-                        <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
+                    <div class="health-bar">
+                        <div class="progress mb-3">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-around">
                         <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
@@ -166,6 +168,22 @@ const printDinoCards = () => {
             </div>`
         )
     })
+
 };
 
-export { printDinoCards }
+const updateHealthColor = () => {
+        if (dino.health >= 50) {
+            $('.progress-bar').addClass('bg-success')
+        } else if (dino.health === 0) {
+            $('.health-bar').html(`
+            <div class="skull">
+                <img src="https://i.pinimg.com/originals/2a/78/84/2a7884eafcce7c9d91964898b57c08cd.jpg" alt="skull and crossbones">
+            </div>
+            `)
+        } else if (dino.health < 50) {
+            $('.progress-bar').addClass('bg-danger')
+        } 
+
+}
+
+export { printDinoCards}
