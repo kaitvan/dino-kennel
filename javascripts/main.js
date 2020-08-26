@@ -1,7 +1,7 @@
-import { printDinoCards } from "./components/printDinoCards.js";
+import { dinoSort } from "./components/printDinoCards.js";
 
 const init = () => {
-    printDinoCards();
+    dinoSort();
 };
 
 init();
