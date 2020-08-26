@@ -165,4 +165,8 @@ const printDinoCards = () => {
     })
 };
 
+const sortDinos = () => {
+
+}
+
 export { printDinoCards }
