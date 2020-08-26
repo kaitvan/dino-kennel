@@ -151,6 +151,11 @@ const dinoCardHtml = (dino) => {
         </div>
         <div class="card-body">
             <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
+            <div class="health-bar">
+                <div class="progress mb-3">
+                    <div class="progress-bar progress-bar-striped" id="${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
+                </div>
+            </div>
             <div class="d-flex justify-content-around">
                 <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
                 <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
@@ -164,13 +169,17 @@ const dinoCardHtml = (dino) => {
 const dinoSort = () => {
     dinos.forEach((dino) => {
         if (dino.health === 0) {
-            $('#dino-graveyard').append(dinoCardHtml(dino))
+            $('#dino-graveyard').append(dinoCardHtml(dino));
         } else if (dino.health < 50) {
-            $('#dino-hospital').append(dinoCardHtml(dino))
+            $('#dino-hospital').append(dinoCardHtml(dino));
         } else {
-            $('#dino-kennel').append(dinoCardHtml(dino))
+            $('#dino-kennel').append(dinoCardHtml(dino));
         }
     });
 }
+
+
+// $('.progress-bar').addClass('bg-success');
+// $('.progress-bar').addClass('bg-danger');
 
 export { dinoSort }
