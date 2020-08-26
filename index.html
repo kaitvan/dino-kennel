@@ -9,8 +9,37 @@
     <link href="/assets/styles/main.css" rel="stylesheet">
 </head>
 <body>
-    <header></header>
-    <div id="add-dino-container"></div>
+    <header>
+        <h1>Dino Kennel</h1>
+    </header>
+    <div class="dropdown" id="add-dino-container">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="add-dino-button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Add Dino</button>
+        <div id="add-dino-form">
+            <form>
+                <div class="form-group mt-3">
+                  <label for="name-input">Name</label>
+                  <input type="text" class="form-control" id="name-input" placeholder="Enter name">
+                </div>
+                <div class="form-group">
+                    <label for="owner-input">Owner</label>
+                    <input type="text" class="form-control" id="owner-input" placeholder="Enter owner">
+                </div>
+                <div class="form-group">
+                    <label for="age-input">Age</label>
+                    <input type="number" class="form-control" id="age-input" placeholder="Enter age">
+                </div>
+                <div class="form-group">
+                    <label for="image-input">Image</label>
+                    <input type="url" class="form-control" id="image-input" placeholder="Enter image URL">
+                </div>
+                <div class="form-group">
+                    <label for="type-input">Type</label>
+                    <input type="text" class="form-control" id="type-input" placeholder="Enter type">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+        </div>
+    </div>
     <div class="dino-kennel-container">
         <h3>Kennel</h3>
         <div id="dino-kennel" class="d-flex flex-wrap justify-content-center"></div>
