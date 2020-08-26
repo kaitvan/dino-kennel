@@ -144,29 +144,33 @@ const adventures = [
     }
 ];
 
-const printDinoCards = () => {
-    dinos.forEach((dino) => {
-        $('#dino-kennel').append(
-            `<div class="card m-2" style="width: 18rem;">
-                <div class="d-flex align-items-center dino-img">
-                    <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
-                    <div class="d-flex justify-content-around">
-                        <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
-                        <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
-                        <button class="btn" id="adventure-button"><i class="fa fa-suitcase"></i></button>
-                        <button class="btn" id="remove-button"><i class="fa fa-trash-o"></i></button>
-                    </div>
-                </div>
-            </div>`
-        )
-    })
-};
-
-const sortDinos = () => {
-
+const dinoCardHtml = (dino) => {
+    return `<div class="card m-2" style="width: 18rem;">
+        <div class="d-flex align-items-center dino-img">
+            <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
+            <div class="d-flex justify-content-around">
+                <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
+                <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
+                <button class="btn" id="adventure-button"><i class="fa fa-suitcase"></i></button>
+                <button class="btn" id="remove-button"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+    </div>`
 }
 
-export { printDinoCards }
+const dinoSort = () => {
+    dinos.forEach((dino) => {
+        if (dino.health === 0) {
+            $('#dino-graveyard').append(dinoCardHtml(dino))
+        } else if (dino.health < 50) {
+            $('#dino-hospital').append(dinoCardHtml(dino))
+        } else {
+            $('#dino-kennel').append(dinoCardHtml(dino))
+        }
+    });
+}
+
+export { dinoSort }
