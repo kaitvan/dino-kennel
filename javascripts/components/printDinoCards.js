@@ -145,7 +145,7 @@ const adventures = [
 ];
 
 const dinoCardHtml = (dino) => {
-    return `<div class="card m-2" style="width: 18rem;">
+    return `<div class="card m-2" id="${dino.id}" style="width: 18rem;">
         <div class="d-flex align-items-center dino-img">
             <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
         </div>
@@ -186,5 +186,45 @@ const addDinoDropdown = () => {
     })
 }
 
+const clearForm = () => {
+    $('#name-input').val('');
+    $('#owner-input').val('');
+    $('#age-input').val('');
+    $('#image-input').val('');
+    $('#type-input').val('');
+}
 
-export { dinoSort, addDinoDropdown }
+const addDinoCard = () => {
+    $('#submit-btn').click(() => {
+        $('#add-dino-form').css('display', 'none');
+        $('#dino-kennel').html('');
+        $('#dino-hospital').html('');
+        $('#dino-graveyard').html('');
+
+        const dinoName = $('#name-input').val();
+        const dinoOwner = $('#owner-input').val();
+        const dinoAge = $('#age-input').val();
+        const dinoImage = $('#image-input').val();
+        const dinoType = $('#type-input').val();
+
+        dinos.push({
+            id: `dino${dinos.length}`,
+            name: dinoName,
+            type: dinoType,
+            age: dinoAge,
+            owner: dinoOwner,
+            adventures: [],
+            health: `${assignRandomHealthScore()}`,
+            imageUrl: dinoImage
+        })
+
+        dinoSort();
+        clearForm();
+    })
+}
+
+const assignRandomHealthScore = () => {
+    return Math.floor(Math.random() * Math.floor(100))
+}
+
+export { dinoSort, addDinoDropdown, addDinoCard }
