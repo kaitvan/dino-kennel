@@ -152,11 +152,11 @@ const dinoCardHtml = (dino) => {
         <div class="card-body">
             <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
             <div class="health-bar">
-                <div class="progress mb-3">
-                    <div class="progress-bar progress-bar-striped" id="${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" id="progress-bar-${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
                 </div>
             </div>
-            <div class="d-flex justify-content-around">
+            <div class="d-flex justify-content-around mt-4">
                 <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
                 <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
                 <button class="btn" id="adventure-button"><i class="fa fa-suitcase"></i></button>
@@ -172,14 +172,19 @@ const dinoSort = () => {
             $('#dino-graveyard').append(dinoCardHtml(dino));
         } else if (dino.health < 50) {
             $('#dino-hospital').append(dinoCardHtml(dino));
+            $(`#progress-bar-${dino.id}`).addClass('bg-danger');
         } else {
             $('#dino-kennel').append(dinoCardHtml(dino));
+            $(`#progress-bar-${dino.id}`).addClass('bg-success');
         }
     });
 }
 
+const addDinoDropdown = () => {
+    $('#add-dino-button').click(() => {
+        $('#add-dino-form').css('display', 'block');
+    })
+}
 
-// $('.progress-bar').addClass('bg-success');
-// $('.progress-bar').addClass('bg-danger');
 
-export { dinoSort }
+export { dinoSort, addDinoDropdown }
