@@ -282,4 +282,30 @@ const petDino = () => {
     })
 }
 
-export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino }
+const adventureDino = () => {
+    $(document).on('click', '.adventure-button', (e) => {
+        const targetId = e.currentTarget.id;
+        const objectId = targetId.replace('-adventure', '');
+
+        dinos.forEach((dino, index) => {
+            if (dino.id === objectId) {
+                dino.adventures.push(assignRandomAdventure());
+                const lastIndex = dino.adventures.length - 1;
+                dino.health -= dino.adventures[lastIndex].healthHit;
+            }
+        })
+
+        $('#dino-kennel').html('');
+        $('#dino-hospital').html('');
+        $('#dino-graveyard').html('');
+        dinoSort();
+    })
+}
+
+const assignRandomAdventure = () => {
+    const randomIndex = Math.floor(Math.random() * Math.floor(9));
+    const adventureChosen = adventures[randomIndex];
+    return adventureChosen;
+}
+
+export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino }
