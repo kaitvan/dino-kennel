@@ -1,4 +1,4 @@
-import { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino } from "./components/printDinoCards.js";
+import { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino } from "./components/printDinoCards.js";
 
 const init = () => {
     dinoSort();
@@ -6,6 +6,7 @@ const init = () => {
     addDinoCard();
     removeDino();
     feedDino();
+    petDino();
 };
 
 init();

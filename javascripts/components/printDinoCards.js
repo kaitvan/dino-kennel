@@ -264,4 +264,22 @@ const feedDino = () => {
     })
 }
 
-export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino }
+const petDino = () => {
+    $(document).on('click', '.pet-button', (e) => {
+        const targetId = e.currentTarget.id;
+        const objectId = targetId.replace('-pet', '');
+
+        dinos.forEach((dino, index) => {
+            if (dino.id === objectId) {
+                dino.health += 10
+            }
+        })
+
+        $('#dino-kennel').html('');
+        $('#dino-hospital').html('');
+        $('#dino-graveyard').html('');
+        dinoSort();
+    })
+}
+
+export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino }
