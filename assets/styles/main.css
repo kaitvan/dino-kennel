@@ -36,22 +36,22 @@ h3 {
     color: black;
 }
 
-#feed-button {
+.feed-button {
     background-color: #6B815F;
     color: white;
 }
 
-#pet-button {
+.pet-button {
     background-color:#141B41;
     color: white;
 }
 
-#adventure-button {
+.adventure-button {
     background-color: #F5BE51;
     color: white;
 }
 
-#remove-button {
+.remove-button {
     background-color: #AD343E;
     color: white;
 }

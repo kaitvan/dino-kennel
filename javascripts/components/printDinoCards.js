@@ -157,10 +157,10 @@ const dinoCardHtml = (dino) => {
                 </div>
             </div>
             <div class="d-flex justify-content-around mt-4">
-                <button class="btn" id="feed-button"><i class="fa fa-cutlery"></i></button>
-                <button class="btn" id="pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
-                <button class="btn" id="adventure-button"><i class="fa fa-suitcase"></i></button>
-                <button class="btn" id="remove-button"><i class="fa fa-trash-o"></i></button>
+                <button class="btn feed-button"><i class="fa fa-cutlery"></i></button>
+                <button class="btn pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
+                <button class="btn adventure-button"><i class="fa fa-suitcase"></i></button>
+                <button class="btn remove-button" id="${dino.id}-remove"><i class="fa fa-trash-o"></i></button>
             </div>
         </div>
     </div>`
@@ -186,14 +186,6 @@ const addDinoDropdown = () => {
     })
 }
 
-const clearForm = () => {
-    $('#name-input').val('');
-    $('#owner-input').val('');
-    $('#age-input').val('');
-    $('#image-input').val('');
-    $('#type-input').val('');
-}
-
 const addDinoCard = () => {
     $('#submit-btn').click(() => {
         $('#add-dino-form').css('display', 'none');
@@ -208,7 +200,7 @@ const addDinoCard = () => {
         const dinoType = $('#type-input').val();
 
         dinos.push({
-            id: `dino${dinos.length}`,
+            id: `dino${dinos.length + 1}`,
             name: dinoName,
             type: dinoType,
             age: dinoAge,
@@ -223,8 +215,36 @@ const addDinoCard = () => {
     })
 }
 
+const clearForm = () => {
+    $('#name-input').val('');
+    $('#owner-input').val('');
+    $('#age-input').val('');
+    $('#image-input').val('');
+    $('#type-input').val('');
+}
+
 const assignRandomHealthScore = () => {
     return Math.floor(Math.random() * Math.floor(100))
 }
 
-export { dinoSort, addDinoDropdown, addDinoCard }
+const removeDino = () => {
+    $(document).on('click', '.remove-button', (e) => {
+        const targetId = e.currentTarget.id;
+        const objectId = targetId.replace('-remove', '');
+
+        dinos.forEach((dino, index) => {
+            if (dino.id === objectId) {
+                dinos.splice(index, 1)
+            }
+        })
+
+        $('#dino-kennel').html('');
+        $('#dino-hospital').html('');
+        $('#dino-graveyard').html('');
+        dinoSort();
+    })
+}
+
+
+
+export { dinoSort, addDinoDropdown, addDinoCard, removeDino }
