@@ -157,9 +157,9 @@ const dinoCardHtml = (dino) => {
                 </div>
             </div>
             <div class="d-flex justify-content-around mt-4">
-                <button class="btn feed-button"><i class="fa fa-cutlery"></i></button>
-                <button class="btn pet-button"><i class="fa fa-hand-paper-o"></i></i></button>
-                <button class="btn adventure-button"><i class="fa fa-suitcase"></i></button>
+                <button class="btn feed-button" id="${dino.id}-feed"><i class="fa fa-cutlery"></i></button>
+                <button class="btn pet-button" id="${dino.id}-pet"><i class="fa fa-hand-paper-o"></i></i></button>
+                <button class="btn adventure-button" id="${dino.id}-adventure"><i class="fa fa-suitcase"></i></button>
                 <button class="btn remove-button" id="${dino.id}-remove"><i class="fa fa-trash-o"></i></button>
             </div>
         </div>
@@ -245,6 +245,23 @@ const removeDino = () => {
     })
 }
 
+const feedDino = () => {
+    $(document).on('click', '.feed-button', (e) => {
+        const targetId = e.currentTarget.id;
+        const objectId = targetId.replace('-feed', '');
 
+        dinos.forEach((dino, index) => {
+            if (dino.id === objectId) {
+                dino.health += 5
+            }
+        })
 
-export { dinoSort, addDinoDropdown, addDinoCard, removeDino }
+        $('#dino-kennel').html('');
+        $('#dino-hospital').html('');
+        $('#dino-graveyard').html('');
+        dinoSort();
+
+    })
+}
+
+export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino }
