@@ -307,14 +307,16 @@ const adventureDino = () => {
     $(document).on('click', '.adventure-button', (e) => {
         const targetId = e.currentTarget.id;
         const objectId = targetId.replace('-adventure', '');
+        const timestamp = new Date();
 
         dinos.forEach((dino, index) => {
             if (dino.id === objectId) {
                 dino.adventures.push(assignRandomAdventure());
                 const lastIndex = dino.adventures.length - 1;
+                dino.adventures[lastIndex].timestamp = timestamp;
                 dino.health -= dino.adventures[lastIndex].healthHit;
             }
-
+            
             if (dino.health < 0) {
                 dino.health = 0
             }
@@ -382,7 +384,7 @@ const buildTableBody = (dino) => {
         $('.table-body').append(
             `<tr>
                 <th scope="row">${index + 1}</th>
-                <td>August 28th 2020, 4:08 pm</td>
+                <td>${adventure.timestamp}</td>
                 <td>${adventure.title}</td>
             </tr>`
         )
