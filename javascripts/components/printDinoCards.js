@@ -182,6 +182,10 @@ const dinoSort = () => {
     });
 }
 
+const updateHealthColor = () => {
+    
+}
+
 const addDinoDropdown = () => {
     $('#add-dino-button').click(() => {
         $('#add-dino-form').css('display', 'block');
@@ -321,48 +325,4 @@ const assignRandomAdventure = () => {
     return adventureChosen;
 }
 
-const showDinoDetails = () => {
-    $(document).on('click', 'a.dino-image-link', function (e) {
-        e.preventDefault();
-        const targetId = e.currentTarget.id;
-        const objectId = targetId.replace('-image', '');
-        const selectedDino = dinos.find(dino => dino.id === objectId);
-        const content = $('.modal-body');
-        content.empty();
-        const table = $('.table-body');
-        table.empty();
-        content.html(buildModalBody(selectedDino));
-        table.html(buildTableBody(selectedDino));
-    })
-}
-
-const buildModalBody = (dino) => {
-    return ` 
-                    <div class="d-flex align-items-center dino-img">
-                        <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
-                    </div>
-                    <div class="dino-details-info">
-                        <h4>${dino.name}</h4>
-                        <p>Type: ${dino.type}</p>
-                        <p>Age: ${dino.age}</p>
-                        <p>Owner: ${dino.owner}</p>
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-striped" id="progress-bar-${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
-                        </div>
-                    </div>`
-}
-
-const buildTableBody = (dino) => {
-
-    dino.adventures.forEach((adventure, index) => {
-        $('.table-body').append(
-            `<tr>
-                <th scope="row">${index + 1}</th>
-                <td>August 28th 2020, 4:08 pm</td>
-                <td>${adventure.title}</td>
-            </tr>`
-        )
-    })
-}
-
-export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino, showDinoDetails }
+export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino }
