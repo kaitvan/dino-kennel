@@ -256,6 +256,10 @@ const feedDino = () => {
             if (dino.id === objectId) {
                 dino.health += 5
             }
+
+            if (dino.health > 100) {
+                dino.health = 100
+            }
         })
 
         $('#dino-kennel').html('');
@@ -274,6 +278,9 @@ const petDino = () => {
         dinos.forEach((dino, index) => {
             if (dino.id === objectId) {
                 dino.health += 10
+            }
+            if (dino.health > 100) {
+                dino.health = 100
             }
         })
 
@@ -294,6 +301,10 @@ const adventureDino = () => {
                 dino.adventures.push(assignRandomAdventure());
                 const lastIndex = dino.adventures.length - 1;
                 dino.health -= dino.adventures[lastIndex].healthHit;
+            }
+
+            if (dino.health < 0) {
+                dino.health = 0
             }
         })
 
