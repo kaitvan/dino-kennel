@@ -147,7 +147,7 @@ const adventures = [
 const dinoCardHtml = (dino) => {
     return `<div class="card m-2" id="${dino.id}" style="width: 18rem;">
         <div class="d-flex align-items-center dino-img">
-            <a href="#" class="dino-image-link">
+            <a href="#" class="dino-image-link" id="${dino.id}-image">
                 <img src="${dino.imageUrl}" class="card-img-top" data-target="#myModal" data-toggle="modal" alt="${dino.type}">
             </a>
         </div>
@@ -310,25 +310,12 @@ const assignRandomAdventure = () => {
     return adventureChosen;
 }
 
-// const showDinoDetails = () => {
-//     $(document).on('click', '.card', (e) => {
-//         const targetId = e.currentTarget.id;
-//         const clickType = e.target.type;
-//         const selectedDino = dinos.find(dino => dino.id === targetId);
-//         console.log(clickType);
-//         if (clickType !== 'submit') {
-//             $('#modal-container').html(buildModalHtml(selectedDino));
-//             $('#myModal').modal();
-//         }
-//     })
-// }
-
 const showDinoDetails = () => {
-    $('a.dino-image-link').click(function (e) {
-        event.preventDefault();
+    $('a.dino-image-link').on('click', function (e) {
+        e.preventDefault();
         const targetId = e.currentTarget.id;
-        console.log(targetId);
-        const selectedDino = dinos.find(dino => dino.id === targetId);
+        const objectId = targetId.replace('-image', '');
+        const selectedDino = dinos.find(dino => dino.id === objectId);
         const content = $('.modal-body');
         content.empty();
         const table = $('.table-body');
@@ -355,17 +342,19 @@ const buildModalBody = (dino) => {
 }
 
 const buildTableBody = (dino) => {
+    const tableHtml = '';
+
     dino.adventures.forEach((adventure, index) => {
-        $('.table-body').append(
+        tableHtml.append(
             `<tr>
                 <th scope="row">${index + 1}</th>
                 <td>August 28th 2020, 4:08 pm</td>
                 <td>${adventure.title}</td>
             </tr>`
         )
-    })                 `
-}
-                    
+    })
 
+    return tableHtml;
+}
 
 export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino, showDinoDetails }
