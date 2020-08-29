@@ -158,7 +158,7 @@ const dinoCardHtml = (dino) => {
                     <div class="progress-bar progress-bar-striped" id="progress-bar-${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
                 </div>
             </div>
-            <div class="d-flex justify-content-around mt-4">
+            <div class="d-flex justify-content-around mt-4 button-group">
                 <button class="btn feed-button" id="${dino.id}-feed"><i class="fa fa-cutlery"></i></button>
                 <button class="btn pet-button" id="${dino.id}-pet"><i class="fa fa-hand-paper-o"></i></i></button>
                 <button class="btn adventure-button" id="${dino.id}-adventure"><i class="fa fa-suitcase"></i></button>
@@ -311,7 +311,7 @@ const assignRandomAdventure = () => {
 }
 
 const showDinoDetails = () => {
-    $('a.dino-image-link').on('click', function (e) {
+    $(document).on('click', 'a.dino-image-link', function (e) {
         e.preventDefault();
         const targetId = e.currentTarget.id;
         const objectId = targetId.replace('-image', '');
@@ -320,8 +320,8 @@ const showDinoDetails = () => {
         content.empty();
         const table = $('.table-body');
         table.empty();
-        $('.modal-body').html(buildModalBody(selectedDino));
-        $('.table-body').html(buildTableBody(selectedDino));
+        content.html(buildModalBody(selectedDino));
+        table.html(buildTableBody(selectedDino));
     })
 }
 
@@ -342,10 +342,9 @@ const buildModalBody = (dino) => {
 }
 
 const buildTableBody = (dino) => {
-    const tableHtml = '';
 
     dino.adventures.forEach((adventure, index) => {
-        tableHtml.append(
+        $('.table-body').append(
             `<tr>
                 <th scope="row">${index + 1}</th>
                 <td>August 28th 2020, 4:08 pm</td>
@@ -353,8 +352,6 @@ const buildTableBody = (dino) => {
             </tr>`
         )
     })
-
-    return tableHtml;
 }
 
 export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino, showDinoDetails }
