@@ -145,9 +145,11 @@ const adventures = [
 ];
 
 const dinoCardHtml = (dino) => {
-    return `<div class="card m-2" id="${dino.id}" data-target="#myModal" data-toggle="modal" style="width: 18rem;">
+    return `<div class="card m-2" id="${dino.id}" style="width: 18rem;">
         <div class="d-flex align-items-center dino-img">
-            <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
+            <a href="#" class="dino-image-link">
+                <img src="${dino.imageUrl}" class="card-img-top" data-target="#myModal" data-toggle="modal" alt="${dino.type}">
+            </a>
         </div>
         <div class="card-body">
             <h5 class="card-title d-flex justify-content-center">${dino.name}</h5>
@@ -308,26 +310,36 @@ const assignRandomAdventure = () => {
     return adventureChosen;
 }
 
+// const showDinoDetails = () => {
+//     $(document).on('click', '.card', (e) => {
+//         const targetId = e.currentTarget.id;
+//         const clickType = e.target.type;
+//         const selectedDino = dinos.find(dino => dino.id === targetId);
+//         console.log(clickType);
+//         if (clickType !== 'submit') {
+//             $('#modal-container').html(buildModalHtml(selectedDino));
+//             $('#myModal').modal();
+//         }
+//     })
+// }
+
 const showDinoDetails = () => {
-    $(document).on('click', '.card', (e) => {
+    $('a.dino-image-link').click(function (e) {
+        event.preventDefault();
         const targetId = e.currentTarget.id;
+        console.log(targetId);
         const selectedDino = dinos.find(dino => dino.id === targetId);
-        $('#modal-container').html(buildModalHtml(selectedDino));
-        $('#myModal').modal();
+        const content = $('.modal-body');
+        content.empty();
+        const table = $('.table-body');
+        table.empty();
+        $('.modal-body').html(buildModalBody(selectedDino));
+        $('.table-body').html(buildTableBody(selectedDino));
     })
 }
 
-const buildModalHtml = (dino) => {
-    return `<div class="modal" id="myModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Dino Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
+const buildModalBody = (dino) => {
+    return ` 
                     <div class="d-flex align-items-center dino-img">
                         <img src="${dino.imageUrl}" class="card-img-top" alt="${dino.type}">
                     </div>
@@ -339,39 +351,21 @@ const buildModalHtml = (dino) => {
                         <div class="progress">
                             <div class="progress-bar progress-bar-striped" id="progress-bar-${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
                         </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Type</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>August 28th 2020, 4:08 pm</td>
-                                <td>Cave Exploration</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>August 28th 2020, 4:10 pm</td>
-                                <td>Playing in Traffic</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>August 28th 2020, 4:12 pm</td>
-                                <td>Surfing</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>`
+                    </div>`
 }
+
+const buildTableBody = (dino) => {
+    dino.adventures.forEach((adventure, index) => {
+        $('.table-body').append(
+            `<tr>
+                <th scope="row">${index + 1}</th>
+                <td>August 28th 2020, 4:08 pm</td>
+                <td>${adventure.title}</td>
+            </tr>`
+        )
+    })                 `
+}
+                    
+
 
 export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino, showDinoDetails }
