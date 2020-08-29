@@ -255,6 +255,7 @@ const removeDino = () => {
         $('#dino-hospital').html('');
         $('#dino-graveyard').html('');
         dinoSort();
+        updateHealthColor();
     })
 }
 
@@ -379,7 +380,6 @@ const buildModalBody = (dino) => {
 }
 
 const buildTableBody = (dino) => {
-
     dino.adventures.forEach((adventure, index) => {
         $('.table-body').append(
             `<tr>
