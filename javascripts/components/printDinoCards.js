@@ -174,16 +174,22 @@ const dinoSort = () => {
             $('#dino-graveyard').append(dinoCardHtml(dino));
         } else if (dino.health < 50) {
             $('#dino-hospital').append(dinoCardHtml(dino));
-            $(`#progress-bar-${dino.id}`).addClass('bg-danger');
+            // $(`#progress-bar-${dino.id}`).addClass('bg-danger');
         } else {
             $('#dino-kennel').append(dinoCardHtml(dino));
-            $(`#progress-bar-${dino.id}`).addClass('bg-success');
+            // $(`#progress-bar-${dino.id}`).addClass('bg-success');
         }
     });
 }
 
 const updateHealthColor = () => {
-    
+    dinos.forEach((dino) => {
+        if (dino.health < 50) {
+            $(`#progress-bar-${dino.id}`).addClass('bg-danger');
+        } else {
+            $(`#progress-bar-${dino.id}`).addClass('bg-success');
+        }
+    })
 }
 
 const addDinoDropdown = () => {
@@ -217,6 +223,7 @@ const addDinoCard = () => {
         })
 
         dinoSort();
+        updateHealthColor();
         clearForm();
     })
 }
@@ -270,7 +277,7 @@ const feedDino = () => {
         $('#dino-hospital').html('');
         $('#dino-graveyard').html('');
         dinoSort();
-
+        updateHealthColor();
     })
 }
 
@@ -292,6 +299,7 @@ const petDino = () => {
         $('#dino-hospital').html('');
         $('#dino-graveyard').html('');
         dinoSort();
+        updateHealthColor();
     })
 }
 
@@ -316,6 +324,7 @@ const adventureDino = () => {
         $('#dino-hospital').html('');
         $('#dino-graveyard').html('');
         dinoSort();
+        updateHealthColor();
     })
 }
 
@@ -336,7 +345,18 @@ const showDinoDetails = () => {
         const table = $('.table-body');
         table.empty();
         content.html(buildModalBody(selectedDino));
+        updateHealthColorModal();
         table.html(buildTableBody(selectedDino));
+    })
+}
+
+const updateHealthColorModal = () => {
+    dinos.forEach((dino) => {
+        if (dino.health < 50) {
+            $(`#modal-progress-bar-${dino.id}`).addClass('bg-danger');
+        } else {
+            $(`#modal-progress-bar-${dino.id}`).addClass('bg-success');
+        }
     })
 }
 
@@ -351,7 +371,7 @@ const buildModalBody = (dino) => {
                         <p>Age: ${dino.age}</p>
                         <p>Owner: ${dino.owner}</p>
                         <div class="progress">
-                            <div class="progress-bar progress-bar-striped" id="progress-bar-${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
+                            <div class="progress-bar progress-bar-striped" id="modal-progress-bar-${dino.id}" role="progressbar" style="width: ${dino.health}%" aria-valuenow="${dino.health}" aria-valuemin="0" aria-valuemax="100">${dino.health}%</div>
                         </div>
                     </div>`
 }
@@ -369,4 +389,4 @@ const buildTableBody = (dino) => {
     })
 }
 
-export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino, showDinoDetails }
+export { dinoSort, addDinoDropdown, addDinoCard, removeDino, feedDino, petDino, adventureDino, showDinoDetails, updateHealthColor }
