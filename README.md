@@ -28,8 +28,8 @@ This was our first milestone project at NSS. The goal was to build a single-page
 
 ## Adding a Dino
 
-![Add a Dinosaur](/assets/readme/add-dino.gif)
+![Add a Dinosaur](/readme/add-dino.gif)
 
 ## Caring for Dinos
 
-![Caring for Dinosaurs](/assets/readme/care-for-dino.gif)
+![Caring for Dinosaurs](/readme/care-for-dino.gif)
